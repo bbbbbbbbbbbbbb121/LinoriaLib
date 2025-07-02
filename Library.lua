@@ -3536,28 +3536,30 @@ function Library:CreateWindow(...)
                 CursorOutline.Color = Color3.new(0, 0, 0);
                 CursorOutline.Visible = true;
 
-                while Toggled and ScreenGui.Parent do
-                    InputService.MouseIconEnabled = false;
+                local Mouse = LocalPlayer:GetMouse()
+                local Connection;
 
-                    local mPos = InputService:GetMouseLocation();
+                Cursor.Color = Library.AccentColor;
 
-                    Cursor.Color = Library.AccentColor;
+                Connection = Mouse.Move:Connect(function()
+                    if Toggled and ScreenGui.Parent then
+                        local mX, mY = Mouse.X, Mouse.Y
 
-                    Cursor.PointA = Vector2.new(mPos.X, mPos.Y);
-                    Cursor.PointB = Vector2.new(mPos.X + 16, mPos.Y + 6);
-                    Cursor.PointC = Vector2.new(mPos.X + 6, mPos.Y + 16);
+                        Cursor.PointA = Vector2.new(mX, mY);
+                        Cursor.PointB = Vector2.new(mX + 16, mY + 6);
+                        Cursor.PointC = Vector2.new(mX + 6, mY + 16);
 
-                    CursorOutline.PointA = Cursor.PointA;
-                    CursorOutline.PointB = Cursor.PointB;
-                    CursorOutline.PointC = Cursor.PointC;
+                        CursorOutline.PointA = Cursor.PointA;
+                        CursorOutline.PointB = Cursor.PointB;
+                        CursorOutline.PointC = Cursor.PointC;
+                    else
+                        Connection:Disconnect();
+                        InputService.MouseIconEnabled = State;
 
-                    RenderStepped:Wait();
-                end;
-
-                InputService.MouseIconEnabled = State;
-
-                Cursor:Remove();
-                CursorOutline:Remove();
+                        Cursor:Remove();
+                        CursorOutline:Remove();
+                    end
+                end)
             end);
         end;
 
