@@ -3508,9 +3508,7 @@ function Library:CreateWindow(...)
     local Fading = false;
 
     function Library:Toggle()
-        if Fading then
-            return;
-        end;
+        if Fading then return end;
 
         local FadeTime = Config.MenuFadeTime;
         Fading = true;
@@ -3523,7 +3521,7 @@ function Library:CreateWindow(...)
 
             task.spawn(function()
                 -- TODO: add cursor fade?
-                local State = InputService.MouseIconEnabled;
+                --[[local State = InputService.MouseIconEnabled;
 
                 local Cursor = Drawing.new('Triangle');
                 Cursor.Thickness = 1;
@@ -3559,7 +3557,7 @@ function Library:CreateWindow(...)
                         Cursor:Remove();
                         CursorOutline:Remove();
                     end
-                end)
+                end)]]
             end);
         end;
 
