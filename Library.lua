@@ -3543,7 +3543,7 @@ function Library:CreateWindow(...)
 
                 Connection = Mouse.Move:Connect(function()
                     if Toggled and ScreenGui.Parent then
-                        local mX, mY = Mouse.X, Mouse.Y
+                        local mX, mY = Mouse.X, Mouse.Y - 15 -- 15 is mouse size i think?
 
                         Cursor.PointA = Vector2.new(mX, mY);
                         Cursor.PointB = Vector2.new(mX + 16, mY + 6);
