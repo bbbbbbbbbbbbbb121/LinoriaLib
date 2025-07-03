@@ -1410,7 +1410,7 @@ do
             local Props = select(1, ...)
             if type(Props) == 'table' then
                 Obj.Text = Props.Text
-                Obj.Func = Props.Func
+                Obj.Func = Props.Func or Props.Callback
                 Obj.DoubleClick = Props.DoubleClick
                 Obj.Tooltip = Props.Tooltip
             else
